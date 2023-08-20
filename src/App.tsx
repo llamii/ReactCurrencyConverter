@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './styles/App.scss'
+import axios from 'axios'
+import Converter from './components/Converter/Converter'
 
-function App() {
+const App = () => {
+  axios.get('https://data.fixer.io/api/convert?access_key=16ffae09b01071ce773a7f374bc295ae&from=RUR&to=USD&amount=100')
+    .then((response) => console.log(response.data))
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Converter />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

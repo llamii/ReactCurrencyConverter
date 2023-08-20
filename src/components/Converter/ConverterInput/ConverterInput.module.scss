@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+
+.box {
+  margin: 24px 0;
+  padding: 32px 24px 16px;
+
+  border: 1px solid $color-gray;
+  border-radius: 8px;
+
+  .input {
+    width: 100%;
+    height: 48px;
+
+    font-size: 48px;
+
+    margin-bottom: 32px;
+
+    outline: 0;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .label {
+    width: 100%;
+    height: 16px;
+    text-transform: uppercase;
+    color: #2d2e30;
+  }
+}

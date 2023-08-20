@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.wrapper {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  gap: 32px;
+  width: 768px;
+
+  .left, .right {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .center {
+    padding-top: 128px;
+  }
+
+  .right {
+
+  }
+
+}
