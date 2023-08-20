@@ -5,30 +5,36 @@ import ConverterSwitch from './ConverterSwitch/ConverterSwitch'
 import ConverterInput from './ConverterInput/ConverterInput'
 import ConverterList from './ConverterList/ConverterList'
 
-import { $isOpenConverterList, closeConverterList } from '../../store/store'
+import { $isOpenConverterList, closeConverterList } from '../../store/ConverterList'
+import { $currencyFrom, $currencyTo, selectClicked } from '../../store/store'
 import styles from './Converter.module.scss'
+import { WhichConverterListClicked } from '../../types/ConverterList'
 
 const Converter = () => {
   const isOpen = useStore($isOpenConverterList)
+
+  const currencyFrom = useStore($currencyFrom)
+  const currencyTo = useStore($currencyTo)
+
   const selectRef = useRef<HTMLDivElement>(null)
 
   const onClose = () => {
     if (isOpen) {
       closeConverterList()
+      selectClicked(null)
     }
   }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
-        <ConverterSelect ref={selectRef} />
+        <ConverterSelect currencyCode={currencyFrom.code} ref={selectRef} onClick={() => selectClicked(WhichConverterListClicked.left)} />
         <ConverterInput />
       </div>
       <div className={styles.center}>
         <ConverterSwitch />
       </div>
       <div className={styles.right}>
-        <ConverterSelect ref={selectRef} />
+        <ConverterSelect currencyCode={currencyTo.code} ref={selectRef} onClick={() => selectClicked(WhichConverterListClicked.right)} />
         <ConverterInput />
       </div>
       <ConverterList isOpen={isOpen} triggerRef={selectRef} onClose={onClose} />

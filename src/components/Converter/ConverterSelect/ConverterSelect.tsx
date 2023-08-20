@@ -3,15 +3,21 @@ import { useStore } from 'effector-react'
 import styles from './ConverterSelect.module.scss'
 import arrowDown from '../../../assets/icons/arrow-down.svg'
 
-import { openConverterList, $isOpenConverterList, closeConverterList } from '../../../store/store'
+import { openConverterList, $isOpenConverterList, closeConverterList } from '../../../store/ConverterList'
 
 interface Props {
+  currencyCode: string;
   ref: React.Ref<HTMLDivElement>
+  onClick?: React.MouseEventHandler
 }
 const ConverterSelect: FC<Props> = (props) => {
-  const { ref } = props
+  const { currencyCode, ref, onClick } = props
   const isOpenConverterList = useStore($isOpenConverterList)
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
+    if (onClick) {
+      onClick(event)
+    }
+
     if (isOpenConverterList) {
       closeConverterList()
       return
@@ -21,7 +27,7 @@ const ConverterSelect: FC<Props> = (props) => {
 
   return (
     <div ref={ref} className={styles.select} onClick={handleClick}>
-      <div className={styles.currency}>RUB</div>
+      <div className={styles.currency}>{currencyCode}</div>
       <div className={styles.arrow}>
         <img src={arrowDown} alt="arrow-down" />
       </div>

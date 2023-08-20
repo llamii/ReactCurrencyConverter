@@ -1,17 +1,22 @@
 import { createEvent, createStore } from 'effector'
-import { Currency } from '../types/Currency'
+import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
+import { WhichConverterListClicked } from '../types/ConverterList'
 
-const $currentTo = createStore<Currency | null>(null)
-const $currentFrom = createStore<Currency | null>(null)
+export const $currentSelectChoosen = createStore<WhichConverterListClicked | null>(null)
 
-export const $isOpenConverterList = createStore(false)
+export const selectClicked = createEvent< WhichConverterListClicked | null>()
 
-export const openConverterList = createEvent()
-export const closeConverterList = createEvent()
+$currentSelectChoosen.on(selectClicked, (_, newSelected) => newSelected)
 
-$isOpenConverterList.on(openConverterList, () => true)
-$isOpenConverterList.on(closeConverterList, () => false)
-
-$isOpenConverterList.watch((state) => {
-  console.log('state', state)
+$currentSelectChoosen.watch((value) => {
+  console.log(value)
 })
+
+export const $currencyFrom = createStore<Currency>(initialCurrencyFrom)
+export const $currencyTo = createStore<Currency>(initialCurrencyTo)
+
+export const setCurrencyFrom = createEvent<Currency>()
+export const setCurrencyTo = createEvent<Currency>()
+
+$currencyFrom.on(setCurrencyFrom, (_, newCurrency) => newCurrency)
+$currencyTo.on(setCurrencyTo, (_, newCurrency) => newCurrency)
