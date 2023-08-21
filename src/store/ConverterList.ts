@@ -1,9 +1,7 @@
 import { createEvent, createStore } from 'effector'
 
-export const $isOpenConverterList = createStore(false)
-
-export const openConverterList = createEvent()
+export const toggleConverterList = createEvent()
 export const closeConverterList = createEvent()
-
-$isOpenConverterList.on(openConverterList, () => true)
-$isOpenConverterList.on(closeConverterList, () => false)
+export const $isOpenConverterList = createStore(false)
+  .on(toggleConverterList, (prev) => !prev)
+  .on(closeConverterList, () => false)

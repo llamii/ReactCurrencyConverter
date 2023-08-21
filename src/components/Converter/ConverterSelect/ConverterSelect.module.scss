@@ -4,6 +4,12 @@
 
 .select {
 
+  &.selected {
+    .arrow img {
+      transform: rotate(180deg);
+    }
+  }
+
   position: relative;
 
   display: flex;
@@ -33,6 +39,8 @@
       margin-top: 2px;
 
       width: 24px;
+
+      transition: transform 0.2s ease-in-out;
     }
   }
 

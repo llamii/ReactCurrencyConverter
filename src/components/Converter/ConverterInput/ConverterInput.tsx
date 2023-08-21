@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './ConverterInput.module.scss'
+import { Position } from '../../../types/Position'
 
-const ConverterInput = () => {
-  const [value, setValue] = useState('100')
+interface Props {
+  value: string;
+  position: Position;
+}
+const ConverterInput: FC<Props> = (props) => {
+  const { value, position } = props
+  const [inputValue, setInputValue] = useState(value)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(event.target.value)
+    setInputValue(event.target.value)
 
   return (
     <div className={styles.box}>
-      <input className={styles.input} onChange={handleChange} value={value} />
+      <input className={styles.input} onChange={handleChange} value={inputValue} />
       <div className={styles.label}>
         1 USD = 0.9204 EUR
       </div>

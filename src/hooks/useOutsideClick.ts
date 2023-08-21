@@ -43,12 +43,12 @@ export function useOutsideClick({
       }
     }
 
-    document.addEventListener('mousedown', handleClick)
-    document.addEventListener('touchstart', handleClick)
+    document.addEventListener('mousedown', handleClick, true)
+    document.addEventListener('touchstart', handleClick, true)
 
     return () => {
-      document.removeEventListener('mousedown', handleClick)
-      document.removeEventListener('touchstart', handleClick)
+      document.removeEventListener('mousedown', handleClick, true)
+      document.removeEventListener('touchstart', handleClick, true)
     }
   }, [enabled, elementRef, triggerRef, handleOutsideClick])
 }

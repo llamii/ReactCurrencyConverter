@@ -9,28 +9,40 @@ import styles from './ConverterList.module.scss'
 import { useOutsideClick } from '../../../hooks/useOutsideClick'
 
 import {
-  $currentSelectChoosen, selectClicked, setCurrencyFrom, setCurrencyTo
+  $currentSelectChosen, selectClicked, setCurrencyFrom, setCurrencyTo
 } from '../../../store/store'
-import { closeConverterList } from '../../../store/ConverterList'
+import { toggleConverterList, closeConverterList } from '../../../store/ConverterList'
 import { Currency } from '../../../types/Currency'
-import { WhichConverterListClicked } from '../../../types/ConverterList'
+import { Position } from '../../../types/Position'
 
 interface Props {
-  isOpen: boolean;
-  onClose: () => void;
+  opened: boolean;
   triggerRef?: React.RefObject<HTMLElement>;
+  onClose: () => void;
 }
+
 const ConverterList: FC<Props> = (props) => {
-  const { isOpen, triggerRef, onClose } = props
+  const { opened, triggerRef, onClose } = props
+
   const [currencies, setCurrencies] = useState<Currency[]>([])
+
+  const currentSelectChoosen = useStore($currentSelectChosen)
+
   const converterListRef = useRef<HTMLDivElement>(null)
-  const currentSelectChoosen = useStore($currentSelectChoosen)
+
+  useOutsideClick({
+    elementRef: converterListRef,
+    triggerRef,
+    onOutsideClick: onClose,
+    enabled: opened
+  })
+
   const handleItemClick = (currency: Currency) => {
     switch (currentSelectChoosen) {
-      case WhichConverterListClicked.left:
+      case Position.left:
         setCurrencyFrom(currency)
         break
-      case WhichConverterListClicked.right:
+      case Position.right:
         setCurrencyTo(currency)
         break
       default:
@@ -38,13 +50,6 @@ const ConverterList: FC<Props> = (props) => {
     selectClicked(null)
     closeConverterList()
   }
-
-  useOutsideClick({
-    elementRef: converterListRef,
-    triggerRef,
-    onOutsideClick: onClose,
-    enabled: isOpen
-  })
 
   const getCurrencies = async () => {
     try {
@@ -65,7 +70,7 @@ const ConverterList: FC<Props> = (props) => {
   }, [])
 
   const renderLists = () => {
-    const chunkSize = Math.ceil(currencies.length / 3) // Определение размера чанка
+    const chunkSize = Math.ceil(currencies.length / 3)
 
     return (
       <>
@@ -83,7 +88,7 @@ const ConverterList: FC<Props> = (props) => {
     )
   }
 
-  if (!isOpen) return null
+  if (!opened) return null
 
   return (
     <div ref={converterListRef} className={styles.wrapper}>

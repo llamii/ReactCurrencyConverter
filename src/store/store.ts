@@ -1,16 +1,19 @@
-import { createEvent, createStore } from 'effector'
+import { createEvent, createStore, sample } from 'effector'
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
-import { WhichConverterListClicked } from '../types/ConverterList'
+import { Position } from '../types/Position'
 
-export const $currentSelectChoosen = createStore<WhichConverterListClicked | null>(null)
+export const $currentSelectChosen = createStore<Position | null>(null)
 
-export const selectClicked = createEvent< WhichConverterListClicked | null>()
+export const selectClicked = createEvent<Position | null>()
 
-$currentSelectChoosen.on(selectClicked, (_, newSelected) => newSelected)
+$currentSelectChosen.on(selectClicked, (_, newSelected) => newSelected)
 
-$currentSelectChoosen.watch((value) => {
-  console.log(value)
-})
+// $currentSelectChosen.watch((value) => {
+//   console.log(value)
+// })
+
+export const $leftInputValue = createStore<string>('1')
+export const $rightInputValue = createStore<string>('')
 
 export const $currencyFrom = createStore<Currency>(initialCurrencyFrom)
 export const $currencyTo = createStore<Currency>(initialCurrencyTo)
@@ -20,3 +23,9 @@ export const setCurrencyTo = createEvent<Currency>()
 
 $currencyFrom.on(setCurrencyFrom, (_, newCurrency) => newCurrency)
 $currencyTo.on(setCurrencyTo, (_, newCurrency) => newCurrency)
+
+export const switchButtonClicked = createEvent()
+
+// sample({
+//
+// })
