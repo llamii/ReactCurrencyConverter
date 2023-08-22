@@ -4,6 +4,7 @@ import {
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
 import { Position } from '../types/Position'
 import { Input } from '../types/Input'
+import { validateInput } from '../utils/validation'
 
 //
 // Inputs
@@ -15,8 +16,15 @@ export const $toInputValue = createStore<Input>({ value: '100', label: '1 USD = 
 export const setFromInputValue = createEvent<Input>()
 export const setToInputValue = createEvent<Input>()
 
-$fromInputValue.on(setFromInputValue, (_, newValue) => newValue)
-$toInputValue.on(setToInputValue, (_, newValue) => newValue)
+$fromInputValue.on(setFromInputValue, (_, newValue) => ({
+  ...newValue,
+  value: validateInput(newValue.value)
+})).watch((value) => console.log(value.value))
+
+$toInputValue.on(setToInputValue, (_, newValue) => ({
+  ...newValue,
+  value: validateInput(newValue.value)
+}))
 
 //
 // Selects

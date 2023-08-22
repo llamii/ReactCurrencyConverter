@@ -3,10 +3,19 @@
 .exchange {
   width: 32px;
 
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+
   padding: 8px;
 
   //border: 1px solid $color-gray;
   //border-radius: 8px;
 
   cursor: pointer;
+
+
+}
+
+.rotated {
+  transform: rotate(180deg);
 }

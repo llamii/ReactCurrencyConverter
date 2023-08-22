@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import styles from './ConverterInput.module.scss'
 import { Position } from '../../../types/Position'
 import { Input } from '../../../types/Input'
+import { validateInput } from '../../../utils/validation'
 
 interface Props {
   value: Input;
@@ -10,7 +11,6 @@ interface Props {
 }
 const ConverterInput: FC<Props> = (props) => {
   const { value, position, onChange } = props
-
   return (
     <div className={styles.box}>
       <input className={styles.input} onChange={onChange} value={value.value} />
