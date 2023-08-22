@@ -7,11 +7,10 @@ import ConverterList from './ConverterList/ConverterList'
 
 import { $isOpenConverterList, closeConverterList, toggleConverterList } from '../../store/display'
 import {
-  $currencyFrom, $currencyTo, $leftInputValue, $rightInputValue, selectClicked
+  $currencyFrom, $currencyTo, $fromInputValue, $toInputValue, selectClicked, setFromInputValue, setToInputValue
 } from '../../store/store'
 import styles from './Converter.module.scss'
 import { Position } from '../../types/Position'
-import { Toggle } from '@/components/Settings/Toggle/Toggle'
 
 const Converter = () => {
   const isListOpen = useStore($isOpenConverterList)
@@ -25,8 +24,8 @@ const Converter = () => {
   const currencyFrom = useStore($currencyFrom)
   const currencyTo = useStore($currencyTo)
 
-  const leftInput = useStore($leftInputValue)
-  const rightInput = useStore($rightInputValue)
+  const fromInput = useStore($fromInputValue)
+  const toInput = useStore($toInputValue)
 
   const handleLeftSelectClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.stopPropagation()
@@ -40,6 +39,14 @@ const Converter = () => {
     toggleConverterList()
   }
 
+  const handleFromInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFromInputValue({ value: e.target.value, label: fromInput.label })
+  }
+
+  const handleToInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setToInputValue({ value: e.target.value, label: toInput.label })
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
@@ -47,7 +54,7 @@ const Converter = () => {
           <span>From:</span>
           <ConverterSelect position={Position.left} currencyCode={currencyFrom.code} ref={selectRef} onClick={(e) => handleLeftSelectClicked(e)} />
         </div>
-        <ConverterInput position={Position.left} value={leftInput} />
+        <ConverterInput onChange={handleFromInputChange} position={Position.left} value={fromInput} />
       </div>
       <div className={styles.center}>
         <ConverterSwitch />
@@ -57,7 +64,7 @@ const Converter = () => {
           <span>To:</span>
           <ConverterSelect position={Position.right} currencyCode={currencyTo.code} ref={selectRef} onClick={handleRightSelectClicked} />
         </div>
-        <ConverterInput position={Position.right} value={rightInput} />
+        <ConverterInput onChange={handleToInputChange} position={Position.right} value={toInput} />
       </div>
       <ConverterList opened={isListOpen} onClose={onClose} triggerRef={selectRef} />
     </div>

@@ -1,5 +1,5 @@
 import {
-  combine, createEvent, createStore, sample
+  combine, createEvent, createStore
 } from 'effector'
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
 import { Position } from '../types/Position'
@@ -9,14 +9,14 @@ import { Input } from '../types/Input'
 // Inputs
 //
 
-export const $leftInputValue = createStore<Input>({ value: '1', label: '1 RUB = 100 USD' })
-export const $rightInputValue = createStore<Input>({ value: '100', label: '1 USD = 0.001 RUB' })
+export const $fromInputValue = createStore<Input>({ value: '1', label: '1 RUB = 100 USD' })
+export const $toInputValue = createStore<Input>({ value: '100', label: '1 USD = 0.001 RUB' })
 
-export const setLeftInputValue = createEvent<Input>()
-export const setRightInputValue = createEvent<Input>()
+export const setFromInputValue = createEvent<Input>()
+export const setToInputValue = createEvent<Input>()
 
-$leftInputValue.on(setLeftInputValue, (_, newValue) => newValue).watch((value) => console.log(value))
-$rightInputValue.on(setRightInputValue, (_, newValue) => newValue).watch((value) => console.log(value))
+$fromInputValue.on(setFromInputValue, (_, newValue) => newValue)
+$toInputValue.on(setToInputValue, (_, newValue) => newValue)
 
 //
 // Selects
@@ -44,14 +44,14 @@ $currentSelectChosen.on(selectClicked, (_, newSelected) => newSelected)
 export const switchButtonClicked = createEvent()
 
 const $swingers = combine({
-  $rightInputValue,
-  $leftInputValue,
+  $toInputValue,
+  $fromInputValue,
   $currencyTo,
   $currencyFrom
 })
 $swingers.on(switchButtonClicked, (stores) => {
   setCurrencyFrom(stores.$currencyTo)
   setCurrencyTo(stores.$currencyFrom)
-  setLeftInputValue(stores.$rightInputValue)
-  setRightInputValue(stores.$leftInputValue)
+  setFromInputValue(stores.$toInputValue)
+  setToInputValue(stores.$fromInputValue)
 })

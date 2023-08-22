@@ -1,7 +1,9 @@
 import { FC } from 'react'
 
 import { clsx } from 'clsx'
+import { useStore } from 'effector-react'
 import styles from './CurrencyList.module.scss'
+import { $currencyTo, $currencyFrom } from '../../store/store'
 
 interface Props {
   isOpen: boolean;
@@ -9,11 +11,20 @@ interface Props {
 
 const CurrencyList:FC<Props> = (props) => {
   const { isOpen } = props
+  const currencyTo = useStore($currencyTo)
+  const currencyFrom = useStore($currencyFrom)
 
   return (
     <div className={clsx(styles.wrapper, isOpen && styles.show)}>
       <div className={styles.currencyTable}>
-        <h3>USD to EUR:</h3>
+        <h3>
+          {currencyFrom.code}
+          {' '}
+          to
+          {' '}
+          {currencyTo.code}
+          :
+        </h3>
         <table>
           <thead>
             <tr>
@@ -66,7 +77,14 @@ const CurrencyList:FC<Props> = (props) => {
       </div>
 
       <div className={styles.currencyTable}>
-        <h3>EUR to USD:</h3>
+        <h3>
+          {currencyTo.code}
+          {' '}
+          to
+          {' '}
+          {currencyFrom.code}
+          :
+        </h3>
         <table>
           <thead>
             <tr>

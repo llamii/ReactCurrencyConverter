@@ -21,7 +21,7 @@ const Settings: FC<Props> = (props) => {
         <Toggle checked={isCurrencyListOpen} onChange={() => toggleCurrencyList()} />
       </div>
       <div className={styles.chart}>
-        <span>Show currency chart</span>
+        <span>Show last 10 days chart</span>
         <Toggle checked={isCurrencyChartOpen} onChange={() => toggleCurrencyChart()} />
       </div>
     </div>

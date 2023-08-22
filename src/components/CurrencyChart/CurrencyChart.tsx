@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import {
   LineChart, XAxis, YAxis, Line, Tooltip, ResponsiveContainer
 } from 'recharts'
