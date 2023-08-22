@@ -3,15 +3,16 @@ import React, {
 } from 'react'
 
 import { clsx } from 'clsx'
-import axios from 'axios'
+
 import { useStore } from 'effector-react'
 import styles from './ConverterList.module.scss'
 import { useOutsideClick } from '../../../hooks/useOutsideClick'
 
+import { fetchCurrencies } from '../../../api/converter'
 import {
   $currentSelectChosen, selectClicked, setCurrencyFrom, setCurrencyTo
 } from '../../../store/store'
-import { toggleConverterList, closeConverterList } from '../../../store/ConverterList'
+import { closeConverterList } from '../../../store/display'
 import { Currency } from '../../../types/Currency'
 import { Position } from '../../../types/Position'
 
@@ -51,22 +52,10 @@ const ConverterList: FC<Props> = (props) => {
     closeConverterList()
   }
 
-  const getCurrencies = async () => {
-    try {
-      const response = await axios.get(
-        'https://api.freecurrencyapi.com/v1/currencies?apikey=fca_live_lUzaqOGxL8WVddJg5kAf7ONla0Qf1GdNOb52uQhn&currencies='
-      )
-      if (response.data && response.data.data) {
-        setCurrencies(Object.values(response.data.data))
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    }
-  }
-
   useEffect(() => {
-    getCurrencies()
+    fetchCurrencies([])
+      .then((res) => setCurrencies(res))
+      .catch((e) => console.error(e))
   }, [])
 
   const renderLists = () => {

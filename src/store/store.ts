@@ -1,19 +1,26 @@
-import { createEvent, createStore, sample } from 'effector'
+import {
+  combine, createEvent, createStore, sample
+} from 'effector'
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
 import { Position } from '../types/Position'
+import { Input } from '../types/Input'
 
-export const $currentSelectChosen = createStore<Position | null>(null)
+//
+// Inputs
+//
 
-export const selectClicked = createEvent<Position | null>()
+export const $leftInputValue = createStore<Input>({ value: '1', label: '1 RUB = 100 USD' })
+export const $rightInputValue = createStore<Input>({ value: '100', label: '1 USD = 0.001 RUB' })
 
-$currentSelectChosen.on(selectClicked, (_, newSelected) => newSelected)
+export const setLeftInputValue = createEvent<Input>()
+export const setRightInputValue = createEvent<Input>()
 
-// $currentSelectChosen.watch((value) => {
-//   console.log(value)
-// })
+$leftInputValue.on(setLeftInputValue, (_, newValue) => newValue).watch((value) => console.log(value))
+$rightInputValue.on(setRightInputValue, (_, newValue) => newValue).watch((value) => console.log(value))
 
-export const $leftInputValue = createStore<string>('1')
-export const $rightInputValue = createStore<string>('')
+//
+// Selects
+//
 
 export const $currencyFrom = createStore<Currency>(initialCurrencyFrom)
 export const $currencyTo = createStore<Currency>(initialCurrencyTo)
@@ -24,8 +31,27 @@ export const setCurrencyTo = createEvent<Currency>()
 $currencyFrom.on(setCurrencyFrom, (_, newCurrency) => newCurrency)
 $currencyTo.on(setCurrencyTo, (_, newCurrency) => newCurrency)
 
+export const $currentSelectChosen = createStore<Position | null>(null)
+
+export const selectClicked = createEvent<Position | null>()
+
+$currentSelectChosen.on(selectClicked, (_, newSelected) => newSelected)
+
+//
+// Switch
+//
+
 export const switchButtonClicked = createEvent()
 
-// sample({
-//
-// })
+const $swingers = combine({
+  $rightInputValue,
+  $leftInputValue,
+  $currencyTo,
+  $currencyFrom
+})
+$swingers.on(switchButtonClicked, (stores) => {
+  setCurrencyFrom(stores.$currencyTo)
+  setCurrencyTo(stores.$currencyFrom)
+  setLeftInputValue(stores.$rightInputValue)
+  setRightInputValue(stores.$leftInputValue)
+})

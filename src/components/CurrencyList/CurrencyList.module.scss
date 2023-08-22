@@ -1,0 +1,81 @@
+@import "../../styles/variables";
+
+
+
+.wrapper {
+
+  visibility: hidden;
+
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  border: 1px solid $color-gray;
+  border-radius: 8px;
+
+  padding: 8px;
+
+    .currencyTable {
+      cursor: default;
+
+      border-spacing: 0;
+      font-size: 14px;
+
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      h3 {
+        margin-top: 8px;
+      }
+
+      &:first-child {
+        border-radius: 0;
+        border-right: 1px solid $color-gray;
+
+        table {
+          padding-right: 32px;
+        }
+      }
+
+      th, td {
+        text-align: center;
+        padding: 4px;
+
+      }
+
+      th {
+        font-weight: 400;
+        border-bottom: 1px solid $color-gray;
+      }
+
+      td {
+        font-size: 12px;
+      }
+
+      tbody tr:hover {
+        background-color: #f0f0f0;
+      }
+
+      td:first-child {
+        text-align: left;
+      }
+
+      td:last-child {
+        font-weight: bold;
+      }
+    }
+
+}
+
+
+.show {
+  visibility: visible;
+
+}
+

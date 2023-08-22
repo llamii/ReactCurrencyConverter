@@ -1,0 +1,33 @@
+@import "../../styles/variables";
+
+
+
+
+.wrapper {
+
+  visibility: hidden;
+
+  height: 226px;
+
+  border: 1px solid $color-gray;
+  border-radius: 8px;
+
+  .closeBtn {
+    z-index: 100;
+    height: 32px;
+    width: 64px;
+  }
+
+  .container {
+    width: 100%;
+
+  }
+  transition: transform 0.5s ease;
+
+}
+
+
+.show {
+  visibility: visible;
+  transform: translateX(0);
+}
