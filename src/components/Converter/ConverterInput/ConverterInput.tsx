@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import styles from './ConverterInput.module.scss'
 import { Position } from '../../../types/Position'
 import { Input } from '../../../types/Input'
-import { validateInput } from '../../../utils/validation'
 
 interface Props {
   value: Input;
   position: Position;
   onChange: React.ChangeEventHandler<HTMLInputElement>
 }
+
 const ConverterInput: FC<Props> = (props) => {
   const { value, position, onChange } = props
   return (

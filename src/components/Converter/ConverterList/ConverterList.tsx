@@ -8,7 +8,7 @@ import { useStore } from 'effector-react'
 import styles from './ConverterList.module.scss'
 import { useOutsideClick } from '../../../hooks/useOutsideClick'
 
-import { fetchCurrencies } from '../../../api/converter'
+import { fetchCurrencies } from '../../../api/converter_api'
 import {
   $currentSelectChosen, selectClicked, setCurrencyFrom, setCurrencyTo
 } from '../../../store/store'
