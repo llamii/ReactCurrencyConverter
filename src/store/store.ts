@@ -1,6 +1,6 @@
 import {
   combine,
-  createEvent, createStore, sample
+  createEvent, createStore, merge, sample
 } from 'effector'
 
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
@@ -12,22 +12,49 @@ import { validateInput } from '../utils/validation'
 // Inputs
 //
 
-export const $fromInputValue = createStore<Input>({ value: '', label: '' })
-export const $toInputValue = createStore<Input>({ value: '', label: '' })
+// export const $fromInputValue = createStore<Input>({ value: '', label: '' })
+// export const $toInputValue = createStore<Input>({ value: '', label: '' })
+
+export const $inputValue = createStore<{ from: Input, to: Input }>(
+  {
+    from: { value: '', label: '' },
+    to: { value: '', label: '' }
+  }
+)
+
+export const setInputFromValue = createEvent<string>()
+
+export const setInputToValue = createEvent<string>()
+
+$inputValue.on(setInputFromValue, (object, value) => ({
+  to: { ...object.to },
+  from: {
+    ...object.from,
+    value: validateInput(value)
+  }
+}))
+
+$inputValue.on(setInputToValue, (object, value) => ({
+  from: { ...object.from },
+  to: {
+    ...object.to,
+    value: validateInput(value)
+  }
+}))
 
 export const inputChanged = createEvent()
-export const setFromInputValue = createEvent<Input>()
-export const setToInputValue = createEvent<Input>()
+// export const setFromInputValue = createEvent<Input>()
+// export const setToInputValue = createEvent<Input>()
 
-$fromInputValue.on(setFromInputValue, (_, newValue) => ({
-  ...newValue,
-  value: validateInput(newValue.value)
-}))
-
-$toInputValue.on(setToInputValue, (_, newValue) => ({
-  ...newValue,
-  value: validateInput(newValue.value)
-}))
+// $fromInputValue.on(setFromInputValue, (_, newValue) => ({
+//   ...newValue,
+//   value: validateInput(newValue.value)
+// }))
+//
+// $toInputValue.on(setToInputValue, (_, newValue) => ({
+//   ...newValue,
+//   value: validateInput(newValue.value)
+// }))
 
 //
 // Selects
@@ -67,37 +94,56 @@ export const $exchangeRateTo = createStore<number>(0)
 //
 export const switchButtonClicked = createEvent()
 
-const $swingers = combine({
+const $switchers = combine({
   $exchangeRateFrom,
   $exchangeRateTo,
-  $toInputValue,
-  $fromInputValue,
+  $inputValue,
   $currencyTo,
   $currencyFrom
 })
-$swingers.on(switchButtonClicked, (stores) => {
+$switchers.on(switchButtonClicked, (stores) => {
   setExchangeRateFrom(stores.$exchangeRateTo)
   setExchangeRateTo(stores.$exchangeRateFrom)
   setCurrencyFrom(stores.$currencyTo)
   setCurrencyTo(stores.$currencyFrom)
-  setFromInputValue(stores.$toInputValue)
-  setToInputValue(stores.$fromInputValue)
+  setInputFromValue(stores.$inputValue.to.value)
+  setInputToValue(stores.$inputValue.from.value)
 })
 
 //
 // Recalculation of the currency cost after changing the value in 'from' & 'to' inputs
 //
 //
+//
+// sample({
+//   clock: inputChanged,
+//   source: {
+//     valueFrom: $fromInputValue, valueTo: $toInputValue, rateFrom: $exchangeRateFrom, rateTo: $exchangeRateTo
+//   },
+//   fn: (({
+//     valueFrom, valueTo, rateFrom, rateTo
+//   }): [Input, Input] => ([
+//     {
+//       ...valueFrom,
+//       value: (parseFloat(valueFrom.value) * rateFrom).toString()
+//     },
+//     {
+//       ...valueTo,
+//       value: (parseFloat(valueTo.value) * rateTo).toString()
+//     }
+//   ])),
+//   target: $toInputValue
+// })
 
-sample({
-  clock: inputChanged,
-  source: { value: $fromInputValue, rate: $exchangeRateFrom },
-  fn: (({ value, rate }) => ({
-    ...value,
-    value: (parseFloat(value.value) * rate).toString()
-  })),
-  target: $fromInputValue
-})
+// sample({
+//   clock: inputChanged,
+//   source: { value: $toInputValue, rate: $exchangeRateTo },
+//   fn: (({ value, rate }) => ({
+//     ...value,
+//     value: (parseFloat(value.value) * rate).toString()
+//   })),
+//   target: $toInputValue
+// })
 
 // sample({
 //   clock: inputChanged,

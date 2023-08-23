@@ -9,11 +9,10 @@ import { $isOpenConverterList, closeConverterList, toggleConverterList } from '.
 import {
   $currencyFrom,
   $currencyTo,
-  $fromInputValue,
-  $toInputValue,
+  $inputValue,
+  setInputToValue,
+  setInputFromValue,
   selectClicked,
-  setFromInputValue,
-  setToInputValue,
   $exchangeRateFrom,
   $exchangeRateTo,
   setExchangeRateFrom,
@@ -36,8 +35,8 @@ const Converter = () => {
   const currencyFrom = useStore($currencyFrom)
   const currencyTo = useStore($currencyTo)
 
-  const fromInput = useStore($fromInputValue)
-  const toInput = useStore($toInputValue)
+  const fromInput = useStore($inputValue).from
+  const toInput = useStore($inputValue).to
 
   const exchangeRateFrom = useStore($exchangeRateFrom)
   const exchangeRateTo = useStore($exchangeRateTo)
@@ -56,12 +55,14 @@ const Converter = () => {
 
   const handleFromInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     inputChanged()
-    setFromInputValue({ value: e.target.value, label: fromInput.label })
+    setInputFromValue(e.target.value)
+    // setFromInputValue({ value: e.target.value, label: fromInput.label })
   }
 
   const handleToInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     inputChanged()
-    setToInputValue({ value: e.target.value, label: toInput.label })
+    setInputToValue(e.target.value)
+    // setToInputValue({ value: e.target.value, label: toInput.label })
   }
 
   useEffect(() => {
@@ -71,8 +72,9 @@ const Converter = () => {
         setExchangeRateTo(1 / res)
       })
       .finally(() => {
-        setFromInputValue({ value: '100', label: 'bla' })
-        setToInputValue({ value: (100 * exchangeRateTo).toString(), label: 'bla' })
+        console.log(`EXchange: ${exchangeRateTo}`)
+        setInputToValue((exchangeRateFrom * 100).toString())
+        setInputFromValue('100')
       })
   }, [])
 
