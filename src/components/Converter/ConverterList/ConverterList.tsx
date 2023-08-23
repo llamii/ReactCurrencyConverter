@@ -64,12 +64,14 @@ const ConverterList: FC<Props> = (props) => {
     return (
       <>
         {Array.from({ length: 3 }).map((_, columnIndex) => (
-          <ul key={columnIndex} className={clsx(styles.list, styles[`list${columnIndex + 1}`])}>
+          <ul className={clsx(styles.list, styles[`list${columnIndex + 1}`])}>
             {currencies.slice(columnIndex * chunkSize, (columnIndex + 1) * chunkSize).map((currency) => (
-              <li key={currency.code} onClick={() => handleItemClick(currency)}>
-                <span className={styles.plural}>{currency.name_plural}</span>
-                <span className={styles.code}>{currency.code}</span>
-              </li>
+              <div onClick={() => handleItemClick(currency)}>
+                <li key={currency.code}>
+                  <span className={styles.plural}>{currency.name_plural}</span>
+                  <span className={styles.code}>{currency.code}</span>
+                </li>
+              </div>
             ))}
           </ul>
         ))}

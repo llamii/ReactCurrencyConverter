@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './styles/index.scss'
 import App from './App'
-import 'process/browser'
+// import 'process/browser'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

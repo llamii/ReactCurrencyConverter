@@ -11,6 +11,7 @@ interface Props {
 
 const ConverterInput: FC<Props> = (props) => {
   const { value, position, onChange } = props
+  console.log(position)
   return (
     <div className={styles.box}>
       <input className={styles.input} onChange={onChange} value={value.value} />

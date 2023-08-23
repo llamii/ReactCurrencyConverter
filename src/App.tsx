@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './styles/App.scss'
-import axios from 'axios'
 
 import { useStore } from 'effector-react'
 import Converter from './components/Converter/Converter'

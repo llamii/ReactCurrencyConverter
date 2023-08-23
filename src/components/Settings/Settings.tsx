@@ -10,8 +10,7 @@ import {
 interface Props {
 
 }
-const Settings: FC<Props> = (props) => {
-  const {} = props
+const Settings: FC<Props> = () => {
   const isCurrencyChartOpen = useStore($isCurrencyChartOpen)
   const isCurrencyListOpen = useStore($isCurrencyListOpen)
   return (

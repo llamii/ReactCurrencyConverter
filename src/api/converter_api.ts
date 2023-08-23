@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Currency } from '../types/Currency'
-import { CurrencyHistory } from '@/types/CurrencyHistory'
+import { CurrencyHistory } from '../types/CurrencyHistory'
 
 // api key for https://app.freecurrencyapi.com/
 const apiKey = process.env.REACT_APP_API_KEY
