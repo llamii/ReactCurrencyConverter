@@ -1,6 +1,6 @@
 import {
   combine,
-  createEvent, createStore, merge, sample
+  createEvent, createStore
 } from 'effector'
 
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'

@@ -13,7 +13,9 @@ const ConverterSwitch = () => {
   }
 
   return (
-    <img className={clsx(styles.exchange, isRotated && styles.rotated)} src={arrowExchange} alt="exchange" onClick={handleSwitchClick} />
+    <div onClick={handleSwitchClick}>
+      <img className={clsx(styles.exchange, isRotated && styles.rotated)} src={arrowExchange} alt="exchange" />
+    </div>
   )
 }
 export default ConverterSwitch
