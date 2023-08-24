@@ -28,8 +28,6 @@ const Converter = () => {
     closeConverterList()
   }
 
-
-
   const currencyFrom = useStore($currencyFrom)
   const currencyTo = useStore($currencyTo)
 
@@ -41,6 +39,8 @@ const Converter = () => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
 
 
+  const [labelFrom, setLabelFrom] = useState('')
+  const [labelTo, setLabelTo] = useState('')
 
   const handleLeftSelectClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.stopPropagation()
@@ -72,11 +72,16 @@ const Converter = () => {
 
   const onSwitchClick = () => {
     const tempInput = fromInput;
+    const tempLabel = labelFrom
     setFromInput(toInput);
     setToInput(tempInput);
+    setLabelFrom(labelTo)
+    setLabelTo(tempLabel)
+
   };
 
   useEffect(() => {
+
     fetchCurrencies([])
       .then((res) => setCurrencies(res))
       .catch((e) => console.error(e));
@@ -84,6 +89,8 @@ const Converter = () => {
 
   useEffect(() => {
     setToInput((parseFloat(fromInput) * exchangeRate).toString());
+    setLabelFrom(`1 ${currencyFrom.code} = ${exchangeRate.toFixed(2)} ${currencyTo.code}`)
+    setLabelTo(`1 ${currencyTo.code} = ${(1/exchangeRate).toFixed(2)} ${currencyFrom.code}`)
   }, [fromInput, exchangeRate]);
 
 
@@ -94,7 +101,7 @@ const Converter = () => {
           <span>From:</span>
           <ConverterSelect position={Position.left} currencyCode={currencyFrom.code} ref={selectRef} onClick={(e) => handleLeftSelectClicked(e)} />
         </div>
-        <ConverterInput onChange={handleFromInputChange} position={Position.left} value={fromInput} />
+        <ConverterInput label={labelFrom} onChange={handleFromInputChange} value={fromInput} />
       </div>
       <div className={styles.center}>
         <ConverterSwitch onClick={onSwitchClick}/>
@@ -104,7 +111,7 @@ const Converter = () => {
           <span>To:</span>
           <ConverterSelect position={Position.right} currencyCode={currencyTo.code} ref={selectRef} onClick={(e) => handleRightSelectClicked(e)} />
         </div>
-        <ConverterInput onChange={handleToInputChange} position={Position.right} value={toInput} />
+        <ConverterInput label={labelTo} onChange={handleToInputChange}  value={toInput} />
       </div>
       <ConverterList currencies={currencies} opened={isListOpen} onClose={onClose} triggerRef={selectRef} />
     </div>

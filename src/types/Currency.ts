@@ -27,3 +27,10 @@ export const initialCurrencyTo:Currency = {
   code: 'RUB',
   name_plural: 'Russian rubles'
 }
+
+export const popularCodes = [
+  'RUB',
+  'EUR',
+  'USD',
+  'GBP'
+]

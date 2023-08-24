@@ -13,7 +13,7 @@ import {
   $currentSelectChosen, selectClicked, setCurrencyFrom, setCurrencyTo
 } from '../../../store/store'
 import { closeConverterList } from '../../../store/display'
-import { Currency } from '../../../types/Currency'
+import { Currency, popularCodes } from '../../../types/Currency'
 import { Position } from '../../../types/Position'
 
 interface Props {
@@ -68,8 +68,8 @@ const ConverterList: FC<Props> = (props) => {
           <ul className={clsx(styles.list, styles[`list${columnIndex + 1}`])}>
             {currencies.slice(columnIndex * chunkSize, (columnIndex + 1) * chunkSize).map((currency) => (
               <div onClick={() => handleItemClick(currency)}>
-                <li key={currency.code}>
-                  <span className={styles.plural}>{currency.name_plural}</span>
+                <li key={currency.code} className={clsx(popularCodes.includes(currency.code) && styles.popular)}>
+                <span className={styles.plural}>{currency.name_plural}</span>
                   <span className={styles.code}>{currency.code}</span>
                 </li>
               </div>

@@ -11,6 +11,12 @@
   }
 }
 
+.popular {
+  .code {
+    color: $color-blue;
+  }
+}
+
 .wrapper {
 
   z-index: 9999;
@@ -56,7 +62,7 @@
       flex-direction: row;
       justify-content: space-between;
 
-      gap: 64px;
+      gap: 32px;
 
       padding: 8px;
       border-radius: 4px;
@@ -68,7 +74,6 @@
 
       .plural {
         font-weight: 300;
-
       }
 
       .code {
