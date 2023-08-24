@@ -4,19 +4,19 @@ import { Position } from '../../../types/Position'
 import { Input } from '../../../types/Input'
 
 interface Props {
-  value: Input;
+  value: string;
   position: Position;
   onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const ConverterInput: FC<Props> = (props) => {
   const { value, position, onChange } = props
-  console.log(position)
+
   return (
     <div className={styles.box}>
-      <input className={styles.input} onChange={onChange} value={value.value} />
+      <input className={styles.input} onChange={onChange} value={value} />
       <div className={styles.label}>
-        {value.label}
+        {/*{value.label}*/}
       </div>
     </div>
   )
