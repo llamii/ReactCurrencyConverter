@@ -1,5 +1,9 @@
 @import '../../../styles/variables';
 
+.disabled {
+  background-color: #f4f4f4;
+}
+
 .box {
   margin: 24px 0;
   padding: 32px 24px 16px;

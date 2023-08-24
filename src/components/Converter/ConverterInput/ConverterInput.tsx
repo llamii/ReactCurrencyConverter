@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import styles from './ConverterInput.module.scss'
 import { Position } from '../../../types/Position'
 import { Input } from '../../../types/Input'
+import { clsx } from 'clsx'
 
 interface Props {
   value: string;
@@ -14,7 +15,7 @@ const ConverterInput: FC<Props> = (props) => {
   const { value, onChange, label , disable} = props
 
   return (
-    <div className={styles.box}>
+    <div className={clsx(styles.box, disable && styles.disabled)}>
       <input disabled={disable} className={styles.input} onChange={onChange} value={value} />
       <div className={styles.label}>
         {label}
