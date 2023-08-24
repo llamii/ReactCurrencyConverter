@@ -16,7 +16,7 @@ const ConverterInput: FC<Props> = (props) => {
 
   return (
     <div className={clsx(styles.box, disable && styles.disabled)}>
-      <input disabled={disable} className={styles.input} onChange={onChange} value={value} />
+      <input type='number' disabled={disable} className={styles.input} onChange={onChange} value={value} />
       <div className={styles.label}>
         {label}
       </div>
