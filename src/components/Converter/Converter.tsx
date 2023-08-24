@@ -9,7 +9,7 @@ import {
   $currencyFrom,
   $currencyTo,
   $exchangeRate,
-  selectClicked,
+  selectClicked
 } from '../../store/store'
 import styles from './Converter.module.scss'
 import { Position } from '../../types/Position'
@@ -29,6 +29,8 @@ const Converter = () => {
   const currencyFrom = useStore($currencyFrom)
   const currencyTo = useStore($currencyTo)
 
+  const isOpenConverterList = useStore($isOpenConverterList)
+
   const exchangeRate = useStore($exchangeRate)
 
   const [fromInput, setFromInput] = useState('100');
@@ -40,12 +42,14 @@ const Converter = () => {
   const [labelTo, setLabelTo] = useState('')
 
   const handleLeftSelectClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
+    console.log(isOpenConverterList)
     e.stopPropagation()
     selectClicked(Position.left)
     toggleConverterList()
   }
 
   const handleRightSelectClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
+    console.log(isOpenConverterList)
     e.stopPropagation()
     selectClicked(Position.right)
     toggleConverterList()
