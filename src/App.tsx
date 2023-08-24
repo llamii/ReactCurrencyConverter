@@ -61,6 +61,9 @@ const App = () => {
 
         <CurrencyChart data={chartData} isOpen={isCurrencyChartOpen} />
       </div>
+      <div className='footer'>
+        © Maxim Grinev
+      </div>
     </div>
   )
 }
