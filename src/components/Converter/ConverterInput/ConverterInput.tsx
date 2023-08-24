@@ -6,15 +6,16 @@ import { Input } from '../../../types/Input'
 interface Props {
   value: string;
   label: string;
+  disable?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const ConverterInput: FC<Props> = (props) => {
-  const { value, onChange, label } = props
+  const { value, onChange, label , disable} = props
 
   return (
     <div className={styles.box}>
-      <input className={styles.input} onChange={onChange} value={value} />
+      <input disabled={disable} className={styles.input} onChange={onChange} value={value} />
       <div className={styles.label}>
         {label}
       </div>

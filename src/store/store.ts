@@ -9,8 +9,9 @@ import { Input } from '../types/Input'
 import { validateInput } from '../utils/validation'
 
 //
-// Inputs
+// Input
 //
+
 
 // export const $inputValue = createStore<{ from: Input, to: Input }>(
 //   {

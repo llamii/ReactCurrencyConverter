@@ -55,19 +55,18 @@ const Converter = () => {
   }
 
   const handleFromInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     const inputValue = e.target.value.replace(',', '.');
-    const parsedValue = parseFloat(inputValue) || 0;
-    const validatedValue = validateInput(parsedValue.toString());
-    setFromInput(validatedValue);
-    setToInput((parsedValue * exchangeRate).toString());
+    const validated = validateInput(inputValue)
+    setFromInput(validated);
+    // setToInput((parseFloat(validated) * exchangeRate).toFixed(2).toString());
   }
 
   const handleToInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value.replace(',', '.');
-    const parsedValue = parseFloat(inputValue) || 0;
-    const validatedValue = validateInput(parsedValue.toString());
-    setToInput(validatedValue);
-    setFromInput((parsedValue / exchangeRate).toString());
+    // const inputValue = e.target.value.replace(',', '.');
+    // const validated = validateInput(inputValue)
+    // setToInput(validated);
+    // setFromInput((parseFloat(validated) / exchangeRate).toString());
   }
 
   const onSwitchClick = () => {
@@ -77,7 +76,6 @@ const Converter = () => {
     setToInput(tempInput);
     setLabelFrom(labelTo)
     setLabelTo(tempLabel)
-
   };
 
   useEffect(() => {
@@ -88,7 +86,12 @@ const Converter = () => {
   }, []);
 
   useEffect(() => {
-    setToInput((parseFloat(fromInput) * exchangeRate).toString());
+    if (fromInput === '') {
+      setToInput('');
+      return;
+    }
+
+    setToInput((parseFloat(fromInput) * exchangeRate).toFixed(2).toString());
     setLabelFrom(`1 ${currencyFrom.code} = ${exchangeRate.toFixed(2)} ${currencyTo.code}`)
     setLabelTo(`1 ${currencyTo.code} = ${(1/exchangeRate).toFixed(2)} ${currencyFrom.code}`)
   }, [fromInput, exchangeRate]);
@@ -111,7 +114,7 @@ const Converter = () => {
           <span>To:</span>
           <ConverterSelect position={Position.right} currencyCode={currencyTo.code} ref={selectRef} onClick={(e) => handleRightSelectClicked(e)} />
         </div>
-        <ConverterInput label={labelTo} onChange={handleToInputChange}  value={toInput} />
+        <ConverterInput disable label={labelTo} onChange={handleToInputChange}  value={toInput} />
       </div>
       <ConverterList currencies={currencies} opened={isListOpen} onClose={onClose} triggerRef={selectRef} />
     </div>

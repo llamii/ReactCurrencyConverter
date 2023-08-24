@@ -48,7 +48,7 @@ const CurrencyChart: FC<Props> = (props) => {
 
 
           <Tooltip position={{ x: 80, y: 240 }} contentStyle={{ backgroundColor: 'transparent', border: 'none' }} />
-          <Line type="monotone" dataKey="value" stroke="#2D2E30" />
+          <Line type="monotone" dataKey="value" stroke="#58a1b7" />
 
         </LineChart>
       </ResponsiveContainer>

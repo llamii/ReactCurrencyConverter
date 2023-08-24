@@ -25,6 +25,11 @@
       border-collapse: collapse;
       background-color: white;
 
+      text-align: -webkit-center;
+
+      table {
+        border-spacing: 0;
+      }
 
       border-radius: 8px;
 
@@ -35,8 +40,8 @@
       }
 
       &:first-child {
-        border-radius: 0;
-        border-right: 1px solid $color-gray;
+        //border-radius: 0;
+        //border-right: 1px solid $color-gray;
 
         table {
           padding-right: 32px;
