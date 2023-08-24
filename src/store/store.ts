@@ -106,6 +106,8 @@ $switchers.on(switchButtonClicked, (stores) => {
 //
 //
 
+// inputs async bug !!!!!!!!!
+
 // sample({
 //   clock: inputChanged,
 //   source: $inputValue,
@@ -162,6 +164,7 @@ $switchers.on(switchButtonClicked, (stores) => {
 //   })),
 //   target: $toInputValue
 // })
+
 
 // sample({
 //   clock: inputChanged,
