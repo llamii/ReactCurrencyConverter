@@ -28,5 +28,21 @@
     color: #898990;
   }
 
+  @media screen and (max-width: 1000px) {
+    .input {
+      font-size: 24px;
+    }
+
+    .label {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 905px) {
+
+      margin: 12px 0;
+
+  }
+
 }
 
