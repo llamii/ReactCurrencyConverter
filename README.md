@@ -13,6 +13,10 @@
 
 ![Скриншот](public/screenshot.jpg)
 
+## Демо
+
+https://react-currency-converter-omega.vercel.app/
+
 ## Технологии
 
 - React
