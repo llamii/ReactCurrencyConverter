@@ -11,35 +11,43 @@ import { Settings } from './components/Settings/Settings'
 import { fetchCurrencyHistory, fetchExchangeRate } from './api/converter_api'
 import { CurrencyHistory } from './types/CurrencyHistory'
 
-import { $exchangeRate, setExchangeRate } from './store/store'
+import { setExchangeRate, $currencyTo, $currencyFrom } from './store/store'
 
 
 const App = () => {
   const isCurrencyChartOpen = useStore($isCurrencyChartOpen)
   const isCurrencyListOpen = useStore($isCurrencyListOpen)
 
-  const exchangeRate = useStore($exchangeRate)
+  const currencyFrom = useStore($currencyFrom)
+  const currencyTo = useStore($currencyTo)
 
   const [chartData, setChartData] = useState<CurrencyHistory[]>([])
 
+  // useEffect(() => {
+  //
+  //
+  //   fetchExchangeRate('USD', 'RUB')
+  //     .then((res) => {
+  //       setExchangeRate(res)
+  //     })
+  //     .finally(() => {
+  //
+  //       // setInputFromValue('10')
+  //       // setInputToValue((parseFloat(inputFromValue.value) * exchangeRateFrom).toString())
+  //     })
+  // }, [])
+
   useEffect(() => {
-    fetchCurrencyHistory('USD', 'RUB').then((res) => {
+    fetchExchangeRate(currencyFrom.code, currencyTo.code)
+      .then((res) => {
+        setExchangeRate(res)
+      })
+    fetchCurrencyHistory(currencyFrom.code, currencyTo.code).then((res) => {
       if (res) {
         setChartData(res)
       }
     })
-
-    fetchExchangeRate('USD', 'RUB')
-      .then((res) => {
-        setExchangeRate(res)
-      })
-      .finally(() => {
-
-        // setInputFromValue('10')
-        // setInputToValue((parseFloat(inputFromValue.value) * exchangeRateFrom).toString())
-      })
-  }, [])
-
+  }, [currencyFrom, currencyTo])
 
 
   return (

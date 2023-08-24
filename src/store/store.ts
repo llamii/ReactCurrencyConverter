@@ -62,7 +62,6 @@ export const $currencyTo = createStore<Currency>(initialCurrencyTo)
 
 export const setCurrencyFrom = createEvent<Currency>()
 export const setCurrencyTo = createEvent<Currency>()
-
 $currencyFrom.on(setCurrencyFrom, (_, newCurrency) => newCurrency)
 $currencyTo.on(setCurrencyTo, (_, newCurrency) => newCurrency)
 

@@ -1,15 +1,21 @@
 import { clsx } from 'clsx'
-import { useState } from 'react'
+import React, { FC, useState } from 'react'
 import arrowExchange from '../../../assets/icons/arrow-exchange.svg'
 
 import styles from './ConverterSwitch.module.scss'
 import { switchButtonClicked } from '../../../store/store'
 
-const ConverterSwitch = () => {
+interface Props {
+  onClick: () => void;
+}
+
+const ConverterSwitch: FC<Props> = (props) => {
+  const { onClick } = props
   const [isRotated, setIsRotated] = useState(false)
   const handleSwitchClick = () => {
     setIsRotated((prevState) => !prevState)
     switchButtonClicked()
+    onClick()
   }
 
   return (

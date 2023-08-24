@@ -20,6 +20,7 @@ interface Props {
   opened: boolean;
   triggerRef?: React.RefObject<HTMLElement>;
   onClose: () => void;
+  currencies: Currency[];
 }
 
 const ConverterList: FC<Props> = (props) => {
@@ -59,7 +60,7 @@ const ConverterList: FC<Props> = (props) => {
   }, [])
 
   const renderLists = () => {
-    const chunkSize = Math.ceil(currencies.length / 3)
+    const chunkSize = Math.ceil(currencies.length / 3);
 
     return (
       <>

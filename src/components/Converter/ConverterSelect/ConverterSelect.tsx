@@ -18,6 +18,7 @@ const ConverterSelect: FC<Props> = (props) => {
   const {
     position, currencyCode, ref, onClick
   } = props
+
   const isOpenConverterList = useStore($isOpenConverterList)
   const currentSelectChosen = useStore($currentSelectChosen)
   const isSelected = () =>
