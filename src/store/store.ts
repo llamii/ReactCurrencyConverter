@@ -1,12 +1,10 @@
 import {
   combine,
-  createEvent, createStore, sample
+  createEvent, createStore
 } from 'effector'
 
 import { Currency, initialCurrencyFrom, initialCurrencyTo } from '../types/Currency'
 import { Position } from '../types/Position'
-import { Input } from '../types/Input'
-import { validateInput } from '../utils/validation'
 
 
 //

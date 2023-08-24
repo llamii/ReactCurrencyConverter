@@ -10,12 +10,11 @@ import {
   $currencyFrom,
   $currencyTo,
   $exchangeRate,
-  setExchangeRate,
   selectClicked,
 } from '../../store/store'
 import styles from './Converter.module.scss'
 import { Position } from '../../types/Position'
-import { fetchCurrencies, fetchExchangeRate } from '../../api/converter_api'
+import { fetchCurrencies } from '../../api/converter_api'
 import { validateInput } from '../../utils/validation'
 import { Currency } from '../../types/Currency'
 

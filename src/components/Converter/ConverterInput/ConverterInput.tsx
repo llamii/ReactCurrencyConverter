@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 import styles from './ConverterInput.module.scss'
-import { Position } from '../../../types/Position'
-import { Input } from '../../../types/Input'
 import { clsx } from 'clsx'
 
 interface Props {
