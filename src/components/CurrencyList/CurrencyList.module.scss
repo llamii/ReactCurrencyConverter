@@ -1,14 +1,12 @@
 @import "../../styles/variables";
 
-
-
 .wrapper {
 
   visibility: hidden;
 
   display: flex;
   flex-direction: row;
-  //gap: 16px;
+
   width: 60%;
   border: 1px solid $color-gray;
   border-radius: 8px;
@@ -40,9 +38,6 @@
       }
 
       &:first-child {
-        //border-radius: 0;
-        //border-right: 1px solid $color-gray;
-
         table {
           padding-right: 16px;
         }
@@ -78,32 +73,12 @@
 
 }
 
-
 .show {
   visibility: visible;
-
 }
-
 
 @media screen and (max-width: 905px) {
   .wrapper {
     width: 100%;
   }
 }
-
-//@media screen and (max-width: 480px) {
-//  .currencyTable {
-//    font-size: 14px;
-//    h3 {
-//      font-size: 16px;
-//    }
-//    th,
-//    td {
-//      font-size: 8px;
-//      padding: 2px;
-//    }
-//  }
-//}
-
-
-

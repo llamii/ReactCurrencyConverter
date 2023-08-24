@@ -11,6 +11,7 @@
   }
 }
 
+
 .popular {
   .code {
     color: $color-blue;
@@ -66,6 +67,7 @@
 
       padding: 8px;
       border-radius: 4px;
+
       cursor: pointer;
 
       &:hover {
@@ -86,10 +88,10 @@
 
       li {
         font-size: 10px;
+
         gap: 8px;
+
         padding: 8px 0;
-
-
       }
     }
 

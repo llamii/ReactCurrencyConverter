@@ -1,7 +1,6 @@
 import { clsx } from 'clsx'
 import React, { FC, useState } from 'react'
 import arrowExchange from '../../../assets/icons/arrow-exchange.svg'
-
 import styles from './ConverterSwitch.module.scss'
 import { switchButtonClicked } from '../../../store/store'
 

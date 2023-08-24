@@ -35,7 +35,6 @@ const App = () => {
     })
   }, [currencyFrom, currencyTo])
 
-
   return (
     <div className="App">
       <div className='settings'>
@@ -44,11 +43,7 @@ const App = () => {
       <Converter />
       <div className="bottom">
         <CurrencyList isOpen={isCurrencyListOpen} />
-
         <CurrencyChart data={chartData} isOpen={isCurrencyChartOpen} />
-      </div>
-      <div className='footer'>
-        © Maxim Grinev
       </div>
     </div>
   )

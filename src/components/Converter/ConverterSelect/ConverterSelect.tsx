@@ -3,7 +3,6 @@ import { useStore } from 'effector-react'
 import { clsx } from 'clsx'
 import styles from './ConverterSelect.module.scss'
 import arrowDown from '../../../assets/icons/arrow-down.svg'
-
 import { $isOpenConverterList } from '../../../store/display'
 import { $currentSelectChosen } from '../../../store/store'
 import { Position } from '../../../types/Position'

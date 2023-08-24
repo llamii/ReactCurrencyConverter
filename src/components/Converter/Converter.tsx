@@ -4,7 +4,6 @@ import ConverterSelect from './ConverterSelect/ConverterSelect'
 import ConverterSwitch from './ConverterSwitch/ConverterSwitch'
 import ConverterInput from './ConverterInput/ConverterInput'
 import ConverterList from './ConverterList/ConverterList'
-
 import { $isOpenConverterList, closeConverterList, toggleConverterList } from '../../store/display'
 import {
   $currencyFrom,

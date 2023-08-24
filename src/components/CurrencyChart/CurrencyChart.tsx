@@ -34,10 +34,7 @@ const CurrencyChart: FC<Props> = (props) => {
             bottom: 0
           }}
         >
-
           <XAxis dataKey="date" style={{ display: 'none' }} tick={false} tickCount={5} tickFormatter={(value, index) => (index % 2 === 0 ? value : '')} />
-
-
           <YAxis
             dataKey="value"
             style={{ display: 'none' }}
@@ -45,11 +42,8 @@ const CurrencyChart: FC<Props> = (props) => {
             domain={[minValue - padding, maxValue + padding]}
             allowDataOverflow
           />
-
-
           <Tooltip position={{ x: 56, y: 232 }} contentStyle={{ backgroundColor: 'transparent', border: 'none' }} />
           <Line type="monotone" dataKey="value" stroke="#58a1b7" />
-
         </LineChart>
       </ResponsiveContainer>
     </div>

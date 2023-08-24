@@ -17,12 +17,10 @@
 
     font-size: 32px;
 
-    padding: 8px 0px;
+    padding: 8px 0;
     margin-bottom: 16px;
 
     outline: 0;
-
-
   }
 
   .label {
@@ -43,9 +41,7 @@
   }
 
   @media screen and (max-width: 905px) {
-
       margin: 12px 0;
-
   }
 
 }
