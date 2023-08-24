@@ -23,20 +23,6 @@ const App = () => {
 
   const [chartData, setChartData] = useState<CurrencyHistory[]>([])
 
-  // useEffect(() => {
-  //
-  //
-  //   fetchExchangeRate('USD', 'RUB')
-  //     .then((res) => {
-  //       setExchangeRate(res)
-  //     })
-  //     .finally(() => {
-  //
-  //       // setInputFromValue('10')
-  //       // setInputToValue((parseFloat(inputFromValue.value) * exchangeRateFrom).toString())
-  //     })
-  // }, [])
-
   useEffect(() => {
     fetchExchangeRate(currencyFrom.code, currencyTo.code)
       .then((res) => {

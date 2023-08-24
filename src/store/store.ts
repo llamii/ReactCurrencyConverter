@@ -8,6 +8,53 @@ import { Position } from '../types/Position'
 import { Input } from '../types/Input'
 import { validateInput } from '../utils/validation'
 
+
+//
+// Selects
+//
+
+export const $currencyFrom = createStore<Currency>(initialCurrencyFrom)
+export const $currencyTo = createStore<Currency>(initialCurrencyTo)
+
+export const setCurrencyFrom = createEvent<Currency>()
+export const setCurrencyTo = createEvent<Currency>()
+$currencyFrom.on(setCurrencyFrom, (_, newCurrency) => newCurrency)
+$currencyTo.on(setCurrencyTo, (_, newCurrency) => newCurrency)
+
+export const $currentSelectChosen = createStore<Position | null>(null)
+
+export const selectClicked = createEvent<Position | null>()
+
+$currentSelectChosen.on(selectClicked, (_, newSelected) => newSelected)
+
+//
+// Exchange rate
+//
+
+export const setExchangeRate = createEvent<number>()
+
+export const $exchangeRate = createStore<number>(0)
+  .on(setExchangeRate, (_, rate) => rate)
+
+
+//
+// Switch
+//
+export const switchButtonClicked = createEvent()
+
+const $switchers = combine({
+  $exchangeRate,
+  $currencyTo,
+  $currencyFrom
+})
+$switchers.on(switchButtonClicked, (stores) => {
+  setExchangeRate(1/stores.$exchangeRate)
+  setCurrencyFrom(stores.$currencyTo)
+  setCurrencyTo(stores.$currencyFrom)
+})
+
+
+
 //
 // Input
 //
@@ -54,49 +101,6 @@ import { validateInput } from '../utils/validation'
 //   value: validateInput(newValue.value)
 // }))
 
-//
-// Selects
-//
-
-export const $currencyFrom = createStore<Currency>(initialCurrencyFrom)
-export const $currencyTo = createStore<Currency>(initialCurrencyTo)
-
-export const setCurrencyFrom = createEvent<Currency>()
-export const setCurrencyTo = createEvent<Currency>()
-$currencyFrom.on(setCurrencyFrom, (_, newCurrency) => newCurrency)
-$currencyTo.on(setCurrencyTo, (_, newCurrency) => newCurrency)
-
-export const $currentSelectChosen = createStore<Position | null>(null)
-
-export const selectClicked = createEvent<Position | null>()
-
-$currentSelectChosen.on(selectClicked, (_, newSelected) => newSelected)
-
-//
-// Exchange rate
-//
-
-export const setExchangeRate = createEvent<number>()
-
-export const $exchangeRate = createStore<number>(0)
-  .on(setExchangeRate, (_, rate) => rate)
-
-
-//
-// Switch
-//
-export const switchButtonClicked = createEvent()
-
-const $switchers = combine({
-  $exchangeRate,
-  $currencyTo,
-  $currencyFrom
-})
-$switchers.on(switchButtonClicked, (stores) => {
-  setExchangeRate(1/stores.$exchangeRate)
-  setCurrencyFrom(stores.$currencyTo)
-  setCurrencyTo(stores.$currencyFrom)
-})
 
 //
 // Recalculation of the currency cost after changing the value in 'from' & 'to' inputs

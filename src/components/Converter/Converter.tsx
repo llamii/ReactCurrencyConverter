@@ -38,7 +38,6 @@ const Converter = () => {
 
   const [currencies, setCurrencies] = useState<Currency[]>([]);
 
-
   const [labelFrom, setLabelFrom] = useState('')
   const [labelTo, setLabelTo] = useState('')
 
@@ -55,18 +54,9 @@ const Converter = () => {
   }
 
   const handleFromInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const inputValue = e.target.value.replace(',', '.');
     const validated = validateInput(inputValue)
     setFromInput(validated);
-    // setToInput((parseFloat(validated) * exchangeRate).toFixed(2).toString());
-  }
-
-  const handleToInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // const inputValue = e.target.value.replace(',', '.');
-    // const validated = validateInput(inputValue)
-    // setToInput(validated);
-    // setFromInput((parseFloat(validated) / exchangeRate).toString());
   }
 
   const onSwitchClick = () => {
@@ -79,7 +69,6 @@ const Converter = () => {
   };
 
   useEffect(() => {
-
     fetchCurrencies([])
       .then((res) => setCurrencies(res))
       .catch((e) => console.error(e));
@@ -94,7 +83,7 @@ const Converter = () => {
     setToInput((parseFloat(fromInput) * exchangeRate).toFixed(2).toString());
     setLabelFrom(`1 ${currencyFrom.code} = ${exchangeRate.toFixed(2)} ${currencyTo.code}`)
     setLabelTo(`1 ${currencyTo.code} = ${(1/exchangeRate).toFixed(2)} ${currencyFrom.code}`)
-  }, [fromInput, exchangeRate]);
+  }, [fromInput, exchangeRate, currencyFrom.code, currencyTo.code]);
 
 
   return (
@@ -114,7 +103,7 @@ const Converter = () => {
           <span>To:</span>
           <ConverterSelect position={Position.right} currencyCode={currencyTo.code} ref={selectRef} onClick={(e) => handleRightSelectClicked(e)} />
         </div>
-        <ConverterInput disable label={labelTo} onChange={handleToInputChange}  value={toInput} />
+        <ConverterInput disable label={labelTo}  value={toInput} />
       </div>
       <ConverterList currencies={currencies} opened={isListOpen} onClose={onClose} triggerRef={selectRef} />
     </div>

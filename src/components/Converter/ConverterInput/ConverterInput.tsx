@@ -8,7 +8,7 @@ interface Props {
   value: string;
   label: string;
   disable?: boolean;
-  onChange: React.ChangeEventHandler<HTMLInputElement>
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const ConverterInput: FC<Props> = (props) => {
