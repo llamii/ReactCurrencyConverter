@@ -16,11 +16,11 @@ const Settings: FC<Props> = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.list}>
-        <span>Show currency list</span>
+        <span>List</span>
         <Toggle checked={isCurrencyListOpen} onChange={() => toggleCurrencyList()} />
       </div>
       <div className={styles.chart}>
-        <span>Show last 10 days chart</span>
+        <span>Chart</span>
         <Toggle checked={isCurrencyChartOpen} onChange={() => toggleCurrencyChart()} />
       </div>
     </div>

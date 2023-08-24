@@ -52,10 +52,13 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className='settings'>
+        <Settings />
+      </div>
       <Converter />
       <div className="bottom">
         <CurrencyList isOpen={isCurrencyListOpen} />
-        <Settings />
+
         <CurrencyChart data={chartData} isOpen={isCurrencyChartOpen} />
       </div>
     </div>

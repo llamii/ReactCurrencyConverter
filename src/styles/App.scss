@@ -6,7 +6,7 @@
   margin: 0;
 
 
-  padding-top: 64px;
+  padding-top: 160px;
 
   box-sizing: border-box;
 
@@ -16,10 +16,16 @@
     flex-direction: row;
     justify-content: space-between;
 
-    width: 70%;
-    //gap: 64px;
+    width: 50%;
+    gap: 64px;
     margin-top: 32px;
     }
 
+  .settings {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+  }
 }
 
