@@ -56,7 +56,7 @@ const ConverterList: FC<Props> = (props) => {
   useEffect(() => {
     fetchCurrencies([])
       .then((res) => setCurrencies(res))
-      .catch((err) => console.error(err))
+      .catch((e) => console.error(e))
   }, [])
 
   const renderLists = () => {
