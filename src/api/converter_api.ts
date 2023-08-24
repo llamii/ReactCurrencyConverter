@@ -59,7 +59,7 @@ export const fetchCurrencyHistory = async (fromCurrency: string, toCurrency: str
 
   const historyArray: CurrencyHistory[] = Object.entries(historyData).map(([date, currencies]) => ({
     date,
-    value: parseFloat((currencies as Record<string, number>)[toCurrency].toFixed(2))
+    value: parseFloat((currencies as Record<string, number>)[toCurrency].toFixed(5))
   }))
 
   return historyArray
