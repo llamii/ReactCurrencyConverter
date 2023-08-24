@@ -11,7 +11,7 @@
 
 ## Пример
 
-![Скриншот](public/screenshot.jpg)
+<img src="public/screenshot.jpg" width="600">
 
 ## Демо
 
